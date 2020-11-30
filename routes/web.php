@@ -21,4 +21,3 @@ Route::get('/login', 'App\Http\Controllers\LoginController@index');
 
 Route::get('/register', 'App\Http\Controllers\RegisterController@index');
 
-

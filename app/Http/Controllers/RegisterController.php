@@ -12,11 +12,13 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
+        $validation = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'confirmed']
         ]);
+
+        return $validation;
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -24,5 +26,10 @@ class RegisterController extends Controller
         ]);
 
         return $user->createToken('Auth Token')->accessToken;
+    }
+
+
+    public function index() {
+        return view('register');
     }
 }

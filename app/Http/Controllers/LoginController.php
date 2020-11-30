@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     public function login(Request $request) {
+
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -27,5 +28,9 @@ class LoginController extends Controller
 
     public function logout(Request $request) {
         $request->user()->tokens()->delete();
+    }
+
+    public function index() {
+        return view('login');
     }
 }
