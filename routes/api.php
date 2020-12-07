@@ -25,16 +25,4 @@ Route::post('/register', 'App\Http\Controllers\RegisterController@register');
 
 Route::post('/logout', 'App\Http\Controllers\LoginController@logout');
 
-Route::get('/redirect', function (Request $request) {
-    $request->session()->put('state', $state = Str::random(40));
 
-    $query = http_build_query([
-        'client_id' => 'client_id',
-        'redirect_uri' => 'http://example.com/callback',
-        'response_type' => 'code',
-        'scope' => '',
-        'state' => $state,
-    ]);
-
-    return redirect('http://mandrivka/oauth/authorize?'.$query);
-});

@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', 'App\Http\Controllers\LoginController@index');
+Route::get('/login', 'App\Http\Controllers\LoginController@index')->name('login');
 
 Route::get('/register', 'App\Http\Controllers\RegisterController@index');
 
+Route::get('/redirect', function (Request $request) {
+    $request->session()->put('state', $state = Str::random(40));
+    $query = http_build_query([
+        'client_id' => '1',
+        'redirect_uri' => 'http:localhost',
+        'response_type' => 'code',
+        'scope' => '',
+        'state' => $state,
+    ]);
+
+    return redirect('http://127.0.0.1:8000/oauth/authorize?'.$query);
+});
