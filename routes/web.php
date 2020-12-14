@@ -27,11 +27,11 @@ Route::get('/redirect', function (Request $request) {
     $request->session()->put('state', $state = Str::random(40));
     $query = http_build_query([
         'client_id' => '1',
-        'redirect_uri' => 'http:localhost',
+        'redirect_uri' => 'http:127.0.0.1:8000/',
         'response_type' => 'code',
         'scope' => '',
         'state' => $state,
     ]);
-
+    error_log($query);
     return redirect('http://127.0.0.1:8000/oauth/authorize?'.$query);
 });
