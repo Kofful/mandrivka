@@ -23,6 +23,8 @@ Route::get('/login', 'App\Http\Controllers\LoginController@index')->name('login'
 
 Route::get('/register', 'App\Http\Controllers\RegisterController@index');
 
+Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware();
+
 Route::get('/redirect', function (Request $request) {
     $request->session()->put('state', $state = Str::random(40));
     $query = http_build_query([
@@ -32,6 +34,6 @@ Route::get('/redirect', function (Request $request) {
         'scope' => '',
         'state' => $state,
     ]);
-    error_log($query);
+
     return redirect('http://127.0.0.1:8000/oauth/authorize?'.$query);
 });

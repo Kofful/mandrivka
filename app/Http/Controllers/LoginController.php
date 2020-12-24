@@ -4,25 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
     public function login(Request $request) {
-
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'min:8']
             ]);
+        if($validator->fails()) {
+            $response = ['code' => '400', 'errors' => $validator->errors()];
+            return response()->json($response);
+        }
         $user = User::where('email', $request->email)->first();
 
         if(!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => 'The provided credentials are incorrect' . $user]);
+            $response = ['code' => '400', 'errors' => ['login'=> ['Login credentials are incorrect.']]];
+            return response()->json($response);
         }
-        return $user->createToken('Auth Token')->accessToken;
+        $response = ['code' => '200', 'token' => $user->createToken('Auth Token')->accessToken];
+        return response()->json($response);
     }
 
 
