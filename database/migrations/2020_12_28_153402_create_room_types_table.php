@@ -14,11 +14,11 @@ class CreateRoomTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('room-types', function (Blueprint $table) {
+        Schema::create('room_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
         });
-        DB::table('room-types')->insert([
+        DB::table('room_types')->insert([
             ['type' => 'Apartment'],
             ['type' => 'De Luxe'],
             ['type' => 'Duplex'],
@@ -36,6 +36,6 @@ class CreateRoomTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room-types');
+        Schema::dropIfExists('room_types');
     }
 }

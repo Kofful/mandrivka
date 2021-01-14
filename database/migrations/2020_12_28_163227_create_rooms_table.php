@@ -18,7 +18,7 @@ class CreateRoomsTable extends Migration
             $table->integer('price');
             $table->integer('places');
             $table->foreignId('hotel_id')->constrained();
-            $table->foreignId('type_id')->constrained('room-types');
+            $table->foreignId('type_id')->constrained('room_types');
         });
     }
 

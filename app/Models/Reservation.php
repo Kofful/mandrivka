@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class Reservation extends Model
 {
     use HasFactory;
-
-    public function state() {
-        return $this->belongsTo('App\Models\State');
-    }
 }

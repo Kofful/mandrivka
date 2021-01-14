@@ -336,19 +336,19 @@ INSERT INTO `reservations` (`room_id`, `reserved`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `room-types`
+-- Структура таблицы `room_types`
 --
 
-CREATE TABLE `room-types` (
+CREATE TABLE `room_types` (
   `id` int(11) NOT NULL,
   `type` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `room-types`
+-- Дамп данных таблицы `room_types`
 --
 
-INSERT INTO `room-types` (`id`, `type`) VALUES
+INSERT INTO `room_types` (`id`, `type`) VALUES
 (1, 'Apartment'),
 (2, 'De Luxe'),
 (3, 'Duplex'),
@@ -2872,9 +2872,9 @@ ALTER TABLE `reservations`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Индексы таблицы `room-types`
+-- Индексы таблицы `room_types`
 --
-ALTER TABLE `room-types`
+ALTER TABLE `room_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2937,9 +2937,9 @@ ALTER TABLE `photos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
--- AUTO_INCREMENT для таблицы `room-types`
+-- AUTO_INCREMENT для таблицы `room_types`
 --
-ALTER TABLE `room-types`
+ALTER TABLE `room_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
@@ -3000,7 +3000,7 @@ ALTER TABLE `reservations`
 -- Ограничения внешнего ключа таблицы `rooms`
 --
 ALTER TABLE `rooms`
-  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `room-types` (`id`),
+  ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `room_types` (`id`),
   ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`);
 
 --
