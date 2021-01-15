@@ -13,7 +13,11 @@ class State extends Model
         return $this->belongsTo('App\Models\Country');
     }
 
-    public function transfers() {
-        return $this->hasMany('App\Models\Transfer');
+    public function transfersFrom() {
+        return $this->hasMany('App\Models\Transfer', 'state1_id');
+    }
+
+    public function transfersTo() {
+        return $this->hasMany('App\Models\Transfer', 'state2_id');
     }
 }

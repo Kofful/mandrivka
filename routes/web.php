@@ -17,13 +17,7 @@ use Illuminate\Support\Str;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth');
 
