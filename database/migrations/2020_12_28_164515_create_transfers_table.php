@@ -18,8 +18,8 @@ class CreateTransfersTable extends Migration
             $table->integer('price');
             $table->date('dispatch');
 
-            $table->foreignId('state1_id')->constrained('states');
-            $table->foreignId('state2_id')->constrained('states');
+            $table->foreignId('state1_id')->constrained('states')->onDelete('cascade');
+            $table->foreignId('state2_id')->constrained('states')->onDelete('cascade');
         });
     }
 

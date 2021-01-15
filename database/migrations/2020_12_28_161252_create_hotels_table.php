@@ -20,7 +20,7 @@ class CreateHotelsTable extends Migration
             $table->boolean('is_hot')->default(0);
             $table->string('description', 2000);
 
-            $table->foreignId('state_id')->constrained();
+            $table->foreignId('state_id')->constrained()->onDelete('cascade');
             $table->foreignId('nutrition_id')->constrained();
         });
     }

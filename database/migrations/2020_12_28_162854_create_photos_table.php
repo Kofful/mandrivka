@@ -17,7 +17,7 @@ class CreatePhotosTable extends Migration
             $table->id();
             $table->string('path');
 
-            $table->foreignId('hotel_id')->constrained();
+            $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
         });
     }
 

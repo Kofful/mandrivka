@@ -19,7 +19,7 @@ class CreateStatesTable extends Migration
             $table->boolean('flying')->default(0);
             $table->boolean('is_resort')->default(1);
 
-            $table->foreignId('country_id')->constrained();
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
         });
     }
 

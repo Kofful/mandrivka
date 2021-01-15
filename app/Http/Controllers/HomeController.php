@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        print_r(Room::getMain());
-        return view('home');
+        $data = Room::getMain();
+        return view('home', $data);
     }
 }

@@ -21,7 +21,7 @@ class Room extends Model
             $room = Room::inRandomOrder()->first();
 
             //проверка на статус "горящего" тура. Сначала ищутся 4 обычных, потом 4 горящих
-            if($room->hotel->is_hot && $count < 4 || !$room->hotel->is_hot && $count >= 4) {
+            if($room->hotel->is_hot && $count >= 4 || !$room->hotel->is_hot && $count < 4) {
                 continue;
             }
             //проверка, есть ли места
@@ -58,8 +58,11 @@ class Room extends Model
                 'dispatch2' => $dispatch2,
                 'state' => $room->hotel->state->state,
                 'country' => $room->hotel->state->country->country,
-                'hotel' => $room->hotel->hotel
+                'hotel' => $room->hotel->hotel,
+                'nights' => $nights,
+                'path' => $room->hotel->photos->first()->path
             ];
+            $tour = array_merge($room->attributesToArray(), $tour);
             if($count < 4) {
                 array_push($tours, $tour);
             } else {

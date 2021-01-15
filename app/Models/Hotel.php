@@ -12,4 +12,8 @@ class Hotel extends Model
     public function state() {
         return $this->belongsTo('App\Models\State');
     }
+
+    public function photos() {
+        return $this->hasMany('App\Models\Photo');
+    }
 }

@@ -18,8 +18,8 @@ class CreateCommentsTable extends Migration
             $table->string('comm', 2000);
             $table->integer('grade');
 
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('hotel_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
         });
     }
 

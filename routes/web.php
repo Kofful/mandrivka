@@ -19,6 +19,12 @@ use Illuminate\Support\Str;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 
+Route::get('/searchtour', 'App\Http\Controllers\SearchTourController@index');
+
+Route::get('/hottour', 'App\Http\Controllers\SearchTourController@hot');
+
+Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
+
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth');
 
 Auth::routes();
