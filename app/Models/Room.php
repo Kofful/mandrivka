@@ -46,7 +46,6 @@ class Room extends Model
                     ->where('state1_id', '=', '15')
                     ->first();
                 if (!$transferFrom || !$transferTo) {
-                    error_log('no tickets');
                     continue;//нет билетов
                 }
                 $total_price += $transferTo->price + $transferFrom->price;
@@ -85,4 +84,9 @@ class Room extends Model
     {
         return $this->hasMany('App\Models\Reservation');
     }
+
+    public function roomType() {
+        return $this->belongsTo('\App\Models\RoomType', 'type_id');
+    }
+
 }

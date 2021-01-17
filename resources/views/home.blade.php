@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Mandrivka Главная')
 @section('content')
 <?php
 function showHotel($hotel)
@@ -31,7 +31,6 @@ function showHotel($hotel)
     <p class="title-hot">Горящие туры</p>
     <div style="display: flex;flex-wrap: wrap;justify-content: space-around;">
         <?php
-        //TODO show info about nights, dates, places
         //получить горящие туры
         foreach ($tours as $row) {
             showHotel($row);
@@ -39,7 +38,7 @@ function showHotel($hotel)
         ?>
     </div>
     <div style="display:flex;justify-content: center;margin:10px;"><a class="btn btn-outline-warning btn-main"
-                                                                      href="/index.php?page=searchtour&hot=1">Смотреть
+                                                                      href="/hottour">Смотреть
             все</a></div>
 </div>
 
@@ -52,5 +51,5 @@ function showHotel($hotel)
     ?>
 </div>
 <div style="display:flex;justify-content: center;"><a class="btn btn-outline-warning btn-main"
-                                                      href="/index.php?page=searchtour">Смотреть все</a></div>
+                                                      href="/searchtour">Смотреть все</a></div>
 @endsection

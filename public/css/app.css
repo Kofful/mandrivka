@@ -223,9 +223,12 @@ input {
     font-size: 22px;
 }
 
-.footer-a {
-    margin: 0 0 0 10px;
-    text-decoration: none;
+.footer {
+    display:flex; height: 150px; width:100%;background-color: #aaa;margin-top: 50px;padding: 10px 0 0 0;
+}
+
+.footer a {
+    margin-left: 30px; color:rgba(0,0,0,0.8); margin-top: 10px;
 }
 
 .label-success {
@@ -375,7 +378,6 @@ input {
     padding: 10px;
 }
 
-
 #dropdownheads {
     width: 300px;
     height: 0;
@@ -383,7 +385,7 @@ input {
     flex-direction: column;
     position: absolute;
     background-color: white;
-    margin-left: -50px;
+    margin-left: -30px;
     transition: 150ms;
     border-radius: 5px;
     overflow: hidden;
@@ -392,6 +394,11 @@ input {
     z-index: 100;
 }
 
+@media (min-width: 1160px) {
+    #dropdownheads {
+        margin-left: -70px;
+    }
+}
 
 #dropdownheads h6 {
     cursor: default;
@@ -555,4 +562,17 @@ input {
     flex-direction: row;
     justify-content: space-between;
 }
+
+header {
+    width:100%;height: 200px;
+}
+
+header img {
+    width:100%;height:100%;object-fit:cover;
+}
+
+.my-navbar {
+    width:100%;box-shadow:0 0 2px 2px rgba(0,0,0,0.1);padding-left: 10px;padding-right: 10px;
+}
+
 

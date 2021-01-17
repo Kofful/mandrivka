@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Управление Mandrivka</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-</head>
-<body>
+@extends('layouts.app')
+@section('title', 'Администрирование Mandrivka')
+@section('content')
 <h1>Admin</h1>
-<script>
-    axios.get('/oauth/tokens')
-        .then(response => {
-            console.log(response.data);
-        });
-</script>
-</body>
-</html>
+@endsection

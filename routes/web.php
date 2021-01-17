@@ -21,24 +21,16 @@ Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/searchtour', 'App\Http\Controllers\SearchTourController@index');
 
-Route::get('/hottour', 'App\Http\Controllers\SearchTourController@hot');
+Route::get('/hottour', 'App\Http\Controllers\SearchTourController@index');
 
 Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth');
 
+Route::post('/states', 'App\Http\Controllers\CountryController@getStates');
+
+Route::post('/tours', 'App\Http\Controllers\RoomController@getTours');
+
 Auth::routes();
 
-Route::get('/redirect', function (Request $request) {
-    $request->session()->put('state', $state = Str::random(40));
-    $query = http_build_query([
-        'client_id' => '1',
-        'redirect_uri' => 'http:127.0.0.1:8000/',
-        'response_type' => 'code',
-        'scope' => '',
-        'state' => $state,
-    ]);
-
-    return redirect('http://127.0.0.1:8000/oauth/authorize?'.$query);
-});
 

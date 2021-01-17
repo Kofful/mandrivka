@@ -16,4 +16,11 @@ class Hotel extends Model
     public function photos() {
         return $this->hasMany('App\Models\Photo');
     }
+
+    public function nutrition() {
+        return $this->belongsTo('App\Models\Nutrition');
+    }
+    public function rooms() {
+        return $this->hasMany('App\Models\Room');
+    }
 }
