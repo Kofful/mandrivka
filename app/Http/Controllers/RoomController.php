@@ -54,7 +54,7 @@ class RoomController extends Controller
         foreach ($hotels as $hotel) {
             $rooms = $hotel->rooms;
             foreach ($rooms as $room) {
-                if ($count > $page + 10) {
+                if ($count >= $page + 10) {
                     break;
                 }
                 //выборка
@@ -109,8 +109,7 @@ class RoomController extends Controller
                 if ($total_price > $max_price || $total_price < $min_price) {
                     continue;
                 }
-
-                if ($count > $page) {
+                if ($count >= $page) {
                     $tour = [
                         'room_type' => $room->roomType->type,
                         'price' => $total_price,

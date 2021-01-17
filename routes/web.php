@@ -23,13 +23,16 @@ Route::get('/searchtour', 'App\Http\Controllers\SearchTourController@index');
 
 Route::get('/hottour', 'App\Http\Controllers\SearchTourController@index');
 
+Route::post('/tours', 'App\Http\Controllers\RoomController@getTours');
+
 Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
+
+Route::post('/hotels', 'App\Http\Controllers\HotelsController@getHotels');
 
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth');
 
 Route::post('/states', 'App\Http\Controllers\CountryController@getStates');
 
-Route::post('/tours', 'App\Http\Controllers\RoomController@getTours');
 
 Auth::routes();
 
