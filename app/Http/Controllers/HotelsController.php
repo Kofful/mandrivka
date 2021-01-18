@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Hotel;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class HotelsController extends Controller
@@ -38,6 +39,64 @@ class HotelsController extends Controller
             $count++;
         }
         return json_encode($response);
+    }
+
+    public function loadImages(Request $request) {
+        if (isset($_FILES)) {
+            $result = "";
+            foreach ($_FILES as $file) {
+                $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/images/uploads/';
+                $filename = basename(str_replace(" ", "", str_replace(".", "", microtime())) . "." . explode("/", $file['type'])[1]);
+                $uploadfile = $uploaddir . $filename;
+                move_uploaded_file($file['tmp_name'], $uploadfile);
+                $img = imagecreatefromjpeg($uploadfile);
+                $width = imagesx($img);
+                $height = imagesy($img);
+                if($width / $height < 1.5) {
+                    $new_height = round($width / 1.5);
+                    $img = imagecrop($img, ['x' => 0, 'y' => round(($height - $new_height) / 2), 'width' => $width, 'height' => $new_height]);
+                } else {
+                    $new_width = round($height * 1.5);
+                    $img = imagecrop($img, ['x' => round(($width - $new_width) / 2), 'y' => 0, 'width' => $new_width, 'height' => $height]);
+                }
+                imagejpeg($img, $uploadfile);
+                $result .= base64_encode(file_get_contents($uploadfile));
+                $result .= " ";
+                imagedestroy($img);
+                unlink($uploadfile);
+            }
+            return $result;
+        }
+    }
+
+    public function add(Request $request) {
+        $hotel = Hotel::create([
+            'state_id' => $request->state_id,
+            'hotel' => $request->hotel,
+            'min_age' => $request->min_age,
+            'nutrition_id' => $request->nutrition,
+            'is_hot' => $request->hot,
+            'description' => $request->description
+        ]);
+        $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/images/uploads/';
+        $total = sizeof($_FILES);
+        $files = array();
+        for ($i = 0; $i < $total; $i++) {
+            $filename = basename(str_replace(" ", "", str_replace(".", "", microtime())) . "." . explode("/", $_FILES['photo' . $i]['type'])[1]);
+            $files[$i] = $filename;
+            $uploadfile = $uploaddir . $filename;
+            move_uploaded_file($_FILES['photo' . $i]['tmp_name'], $uploadfile);
+        }
+        $photos = array();
+        for ($i = 0; $i < $total; $i++) {
+            $photos[$i] = Photo::create([
+                'hotel_id' => $hotel->id,
+                'path' => $files[$i]
+            ]);
+        }
+        $hotel = $hotel->toArray();
+        $hotel['photos'] = $photos;
+        return json_encode($hotel);
     }
 
     public function index()

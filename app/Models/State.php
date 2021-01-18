@@ -9,6 +9,9 @@ class State extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['state', 'country_id'];
+    public $timestamps = false;
+
     public function country() {
         return $this->belongsTo('App\Models\Country');
     }

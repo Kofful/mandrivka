@@ -9,6 +9,9 @@ class Hotel extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['state_id', 'nutrition_id', 'hotel', 'is_hot', 'description', 'min_age'];
+    public $timestamps = false;
+
     public function state() {
         return $this->belongsTo('App\Models\State');
     }

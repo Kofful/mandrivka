@@ -29,9 +29,21 @@ Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
 
 Route::post('/hotels', 'App\Http\Controllers\HotelsController@getHotels');
 
+Route::post('/hotel', 'App\Http\Controllers\HotelsController@add');
+
+Route::post('/loadimages', 'App\Http\Controllers\HotelsController@loadImages');
+
 Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth');
 
+Route::post('/country', 'App\Http\Controllers\CountryController@add');
+
+Route::delete('/country/{id}', 'App\Http\Controllers\CountryController@delete');
+
 Route::post('/states', 'App\Http\Controllers\CountryController@getStates');
+
+Route::post('/state', 'App\Http\Controllers\StateController@add');
+
+Route::delete('/state/{id}', 'App\Http\Controllers\StateController@delete');
 
 
 Auth::routes();
