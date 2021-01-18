@@ -107,4 +107,21 @@ class HotelsController extends Controller
         ];
         return view('hotels', $data);
     }
+
+    public function hotel($id, Request $request) {
+        $hotel = Hotel::find($id);
+        $data = [
+            'hotel' => [
+                'hotel' => $hotel->hotel,
+                'id' => $id,
+                'country' => $hotel->state->country->country,
+                'state' => $hotel->state->state,
+                'photos' => $hotel->photos->toArray(),
+                'description' => $hotel->description,
+
+            ],
+            'daterange' => $request->input('daterange'),
+            ];
+        return view('hotel', $data);
+    }
 }

@@ -66,20 +66,24 @@
                 data = JSON.parse(data);
                 let hotels = $('#hotel-container');
                 $('#loader')[0].remove();
-                if (data != null) {
-                    if (data.length == 10) {
+                if (data != null && data.length !== 0) {
+                    if (data.length === 10) {
                         hotels.after("<div id='loadMore' style='display:flex;justify-content: center;'><button onclick='onLoadMore()' class='button-more btn btn-outline-warning'>ЕЩЕ</button></div>");
                     }
                     data.forEach(function (hotel) {
                         hotels.append("<div class='list-item'>\n" +
                             "<img src='../images/uploads/" + hotel["path"] + "' style='min-width:200px;width:200px;height:133px;align-self:center'>" +
                             "<div style='margin-left:10px;margin-top:5px;margin-right:10px; width:100%;'>" +
-                            "<a href='/index.php?page=hotel&id=" + hotel['id'] + "' class='title'>" + hotel['hotel'] + "</a>\n" +
+                            "<a href='/hotels/" + hotel['id'] + "' class='title'>" + hotel['hotel'] + "</a>\n" +
                             "<p class='description'>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p>\n" +
                             "</div>" +
                             "</div>");
-                    })
-                    ;
+                    });
+                } else {
+                    hotels.append("<div class='img_no_tours'>" +
+                        "<img src='../images/no_hotels.png' style='height:300px;'>" +
+                        "<h5>По данному запросу отели не найдены.</h5>" +
+                        "</div>");
                 }
             });
         }

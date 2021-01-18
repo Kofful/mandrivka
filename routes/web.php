@@ -27,6 +27,8 @@ Route::post('/tours', 'App\Http\Controllers\RoomController@getTours');
 
 Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
 
+Route::get('/hotels/{id}', 'App\Http\Controllers\HotelsController@hotel');
+
 Route::post('/hotels', 'App\Http\Controllers\HotelsController@getHotels');
 
 Route::post('/hotel', 'App\Http\Controllers\HotelsController@add');
