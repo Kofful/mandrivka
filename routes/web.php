@@ -55,4 +55,6 @@ Route::delete('/room/{id}', 'App\Http\Controllers\RoomController@delete');
 
 Route::post('/reservation', 'App\Http\Controllers\ReservationController@add');
 
+Route::delete('/application/{id}', 'App\Http\Controllers\ApplicationController@delete');
+
 Auth::routes();
