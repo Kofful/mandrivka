@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use mysql_xdevapi\Exception;
 
 class Room extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['type_id', 'hotel_id', 'price', 'places'];
+    public $timestamps = false;
 
     public static function getMain()
     {
@@ -26,7 +30,7 @@ class Room extends Model
             }
             //проверка, есть ли места
             if (($room->reservations
-                ->where('reserved', '>', $dispatch1)
+                ->where('reserved', '>=', $dispatch1)
                 ->where('reserved', '<', $dispatch2)
                 ->first())) {
                 continue;//не подходит, потому что занят в выбранный период
@@ -48,7 +52,7 @@ class Room extends Model
                 if (!$transferFrom || !$transferTo) {
                     continue;//нет билетов
                 }
-                $total_price += $transferTo->price + $transferFrom->price;
+                $total_price += ($transferTo->price + $transferFrom->price) * $room->places;
             }
             $tour = [
                 'price' => $total_price,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -23,7 +24,6 @@ class RoomController extends Controller
 
         $places = 0;
         $min_age = 18;
-        $multiplier = 1;
         error_log($request);
         if (isset($request->children) && $request->children > 0) {
             $adults = $request->adults;
@@ -32,17 +32,11 @@ class RoomController extends Controller
             foreach ($request->child_ages as $childage) {
                 if ($childage > 1) {
                     $places++;
-                    if ($childage < 12) {
-                        $half++;
-                    } else {
-                        $adults++;
-                    }
                 }
                 if ($childage < $min_age) {
                     $min_age = $childage;
                 }
             }
-            $multiplier = ($half * 0.5 + $adults) / $places;
         } else {
             $places = $request->adults;
         }
@@ -82,12 +76,12 @@ class RoomController extends Controller
 
                 //проверка, есть ли места
                 if (($room->reservations
-                    ->where('reserved', '>', $request->dispatch1)
+                    ->where('reserved', '>=', $request->dispatch1)
                     ->where('reserved', '<', $dispatch2)
                     ->first())) {
                     continue;//не подходит, потому что занят в выбранный период
                 }
-                $total_price = $room->price * $nights * $multiplier;
+                $total_price = $room->price * $nights;
 
                 //проверка на страну. Поиск билетов, если это не Украина
                 if ($room->hotel->state->country->id == 12) {//если Украина
@@ -104,7 +98,7 @@ class RoomController extends Controller
                     if (!$transferFrom || !$transferTo) {
                         continue;//нет билетов
                     }
-                    $total_price += $transferTo->price + $transferFrom->price;
+                    $total_price += ($transferTo->price + $transferFrom->price) * $room->places;
                 }
                 if ($total_price > $max_price || $total_price < $min_price) {
                     continue;
@@ -130,5 +124,25 @@ class RoomController extends Controller
             }
         }
         return json_encode($tours);
+    }
+
+    public function add(Request $request) {
+        $room = Room::create([
+            'hotel_id' => $request->hotel_id,
+            'type_id' => $request->type_id,
+            'price' => $request->price,
+            'places' => $request->places
+        ]);
+        return json_encode($room);
+    }
+
+    public function delete($id) {
+        $room = Room::find($id);
+        if ($room) {
+            $room->delete();
+        } else {
+            return null;
+        }
+        return json_encode($room);
     }
 }

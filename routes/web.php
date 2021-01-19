@@ -29,6 +29,8 @@ Route::get('/hotels', 'App\Http\Controllers\HotelsController@index');
 
 Route::get('/hotels/{id}', 'App\Http\Controllers\HotelsController@hotel');
 
+Route::delete('/hotels/{id}', 'App\Http\Controllers\HotelsController@delete');
+
 Route::post('/hotels', 'App\Http\Controllers\HotelsController@getHotels');
 
 Route::post('/hotel', 'App\Http\Controllers\HotelsController@add');
@@ -47,7 +49,10 @@ Route::post('/state', 'App\Http\Controllers\StateController@add');
 
 Route::delete('/state/{id}', 'App\Http\Controllers\StateController@delete');
 
+Route::post('/room', 'App\Http\Controllers\RoomController@add');
+
+Route::delete('/room/{id}', 'App\Http\Controllers\RoomController@delete');
+
+Route::post('/reservation', 'App\Http\Controllers\ReservationController@add');
 
 Auth::routes();
-
-

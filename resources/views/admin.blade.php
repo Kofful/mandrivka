@@ -281,77 +281,50 @@
         <button type="submit" class="btn btn-danger form-control" onclick="deleteState()">Удалить</button>
     </div>
 </div>
-
-
-<!--TODO relocate logic to hotel page-->
-<form action="index.php?page=admin" method="post"
-      style="background-color:white;box-shadow:0 0 2px 2px rgba(0,0,0,0.1); margin:10px; padding:10px;">
-    <label>Удалить отель:</label><br>
-    <label>Страна</label>
-    <script>
-        function onChangeCountry1(country) {
-            $.post('functions.php', {get_states: 0, country: country.value}, function (data) {
-                let states = $('#states2')[0].options;
-                for (i = states.length; i > 0; i--) {
-                    states[i] = null;
-                }
-                data = JSON.parse(data);
-                states = $('#states2');
-                data.forEach(function (state) {
-                        states.append("<option value='" + state['id'] + "'>" + state['state'] + "</option>")
+<div class="applications-container">
+    <p class='hotel-description-title'>Заявки на туры</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Клиент</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Страна</th>
+            <th scope="col">Город</th>
+            <th scope="col">Отель</th>
+            <th scope="col">Номер</th>
+            <th scope="col">Время отдыха</th>
+            <th scope="col">Стоимость</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <script>
+            function deleteApplication(id) {
+                $.ajax({
+                    url: '/application/' + id,
+                    type: 'DELETE',
+                    success: function (data) {
+                        if (data) {
+                            $('#application' + id).remove();
+                        }
                     }
-                )
-                ;
-            });
-        }
-    </script>
-    <select id='countries1' name="country" onchange="onChangeCountry1(this)">
-        <option value='0'>Выбрать страну</option>
-    </select><br>
-    <label>Город</label>
-    <script>
-        function onChangeState(state) {
-            $.post('functions.php', {
-                get_hotels: 0,
-                state: state.value,
-                country: $('#countries')[0]['value']
-            }, function (data) {
-                let hotels = $('#hotels')[0].options;
-                for (i = hotels.length; i > 0; i--) {
-                    hotels[i] = null;
-                }
-                data = JSON.parse(data);
-                hotels = $('#hotels');
-                data.forEach(function (hotel) {
-                    console.log(hotel);
-                    hotels.append("<option value='" + hotel['id'] + "'>" + hotel['hotel'] + "</option>")
-                })
-                ;
-            });
-        }
-    </script>
-    <select id="states2" name="state" onchange="onChangeState(this)">
-        <option value='0'>Выбрать город</option>
-        ;
-        <?php
-        if (isset($_POST['states1'])) {
-            while ($row = mysqli_fetch_array($_POST['states1'])) {
-                echo "<option value='" . $row['id'] . ($row['id'] == $_POST['state'] ? "'selected>" : "'>") . $row['state'] . "</option>";
+                });
             }
+        </script>
+        <tbody>
+        <?php
+        foreach($applications as $application) {
+            echo "<tr id='" . "application" . $application['id'] . "'>
+<td>" . $application['customer_name'] ."</td>
+<td>" . $application['customer_phone'] . "</td>
+<td>" . $application['country'] . "</td>
+<td>" . $application['state'] . "</td>
+<td>" . $application['hotel'] . "</td>
+<td>" . $application['room'] . "</td>
+<td>" . $application['daterange'] . "</td>
+<td>" . $application['price'] . "</td>" . (((Auth::user() && Auth::user()->is_admin)) ? "<td><button class='btn btn-info btn-room' onclick='deleteApplication(" . $application['id'] . ")'>Готово</button></td>" : "") . "</tr>";
         }
         ?>
-    </select><br>
-    <label>Отель:</label>
-    <select id="hotels" name="hotel">
-        <?php
-        if (isset($_POST['hotels'])) {
-            while ($row = mysqli_fetch_array($_POST['hotels'])) {
-                echo "<option value='" . $row['id'] . "'>" . $row['hotel'] . "</option>";
-            }
-        }
-        ?>
-    </select>
-    <button type="submit" class="btn btn-danger" name="btn_hotel_del">Удалить отель</button>
-</form>
-
+        </tbody>
+    </table>
+</div>
 @endsection

@@ -5,6 +5,7 @@ html, body {
 p {
     margin-bottom: 0;
 }
+
 input {
     box-shadow: none !important;
 }
@@ -67,6 +68,19 @@ input {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+.table {
+    margin-top: 20px;
+}
+
+.rooms-container {
+    width: 80%;
+    margin-top: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.btn-room {
+    width: 100%;
+}
 
 .hotel-description {
     width: 80%;
@@ -113,7 +127,7 @@ input {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
     position: absolute;
     height: 120px;
-    width:250px;
+    width: 250px;
     display: flex;
     justify-content: space-between;
     padding: 5px 10px 0 10px;
@@ -126,9 +140,9 @@ input {
 }
 
 .main-img {
-    min-width:250px;
-    width:250px;
-    height:166px;
+    min-width: 250px;
+    width: 250px;
+    height: 166px;
 }
 
 .main-title {
@@ -165,31 +179,30 @@ input {
 }
 
 
-@media (min-width: 1300px) {
-
-    .right-form {
-        background-color: white;
-        padding: 10px 30px 0px 30px;
-        width: 300px;
-        border-radius: 10px;
-        font-family: 'Roboto Condensed', sans-serif;
-        position: fixed;
-        right: 10px;
-        bottom: 10px;
-        box-shadow: 0 0 4px 4px rgba(0,0,0,0.1);
-    }
-
-    .phone-request {
-        margin-top: 30px !important;
-    }
-
-    .btn-send-request {
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
+.right-form {
+    background-color: lightgray;
+    padding: 10px 30px 0px 30px;
+    height: 100%;
+    max-height: 400px;
+    width: 400px;
+    border-radius: 0 10px 10px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    right: 10px;
+    bottom: 10px;
 }
 
-.hotel-description
+.phone-request {
+    margin-top: 10px !important;
+}
+
+.btn-send-request {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.hotel-description {
+
+}
 
 
 .image-container {
@@ -199,7 +212,8 @@ input {
 
 .title-form {
     margin-bottom: 0;
-    font-size: 24px;
+    font-size: 25px;
+    font-weight: 600;
 }
 
 .label-form {
@@ -212,23 +226,19 @@ input {
     height: 50px;
 }
 
-.hotel-price {
-    font-size: 32px;
-    font-weight: 600;
-    color: white;
-}
-
-.hotel-price-add {
-    margin-top: 20px;
-    font-size: 22px;
-}
-
 .footer {
-    display:flex; height: 150px; width:100%;background-color: #aaa;margin-top: 50px;padding: 10px 0 0 0;
+    display: flex;
+    height: 150px;
+    width: 100%;
+    background-color: #aaa;
+    margin-top: 50px;
+    padding: 10px 0 0 0;
 }
 
 .footer a {
-    margin-left: 30px; color:rgba(0,0,0,0.8); margin-top: 10px;
+    margin-left: 30px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 10px;
 }
 
 .label-success {
@@ -333,7 +343,7 @@ input {
 }
 
 .form-container {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -496,6 +506,7 @@ input {
     position: absolute;
     z-index: -1;
 }
+
 #upload-images-button {
     font-size: 1em;
     font-weight: 500;
@@ -514,8 +525,8 @@ input {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color:white;
-    box-shadow:0 0 2px 2px rgba(0,0,0,0.1);
+    background-color: white;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
     margin: 10px;
     padding: 10px;
     justify-content: space-between;
@@ -552,8 +563,9 @@ input {
 }
 
 .dropdown-img {
-    width: 45px;
-    height: 45px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
 
 .title-container {
@@ -564,15 +576,21 @@ input {
 }
 
 header {
-    width:100%;height: 200px;
+    width: 100%;
+    height: 200px;
 }
 
 header img {
-    width:100%;height:100%;object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .my-navbar {
-    width:100%;box-shadow:0 0 2px 2px rgba(0,0,0,0.1);padding-left: 10px;padding-right: 10px;
+    width: 100%;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .img_no_tours {
