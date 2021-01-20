@@ -76,6 +76,12 @@
                             "<div style='margin-left:10px;margin-top:5px;margin-right:10px; width:100%;'>" +
                             "<a href='/hotels/" + hotel['id'] + "' class='title'>" + hotel['hotel'] + "</a>\n" +
                             "<p class='description'>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p>\n" +
+                            "<div class='hotels-info-container'>" +
+                            "<div class='rating-container'><img class='image-rating' src='../images/star.png'><p class='info-rating'>" + "Рейтинг: " + hotel['rating'] + "</p></div>" +
+                            "<div class='hotels-places-container'><img class='image-places' src='../images/room.png'><p class='hotels-info-places'>" + "Свободно: " + hotel['free_places'] + "</p></div>" +
+                            "<div class='price-container'><p class='info-price'><img class='image-price' src='../images/cash.png'>" + "Цена: от " + Math.round(hotel['price']) + " грн/сутки</p>" +
+                            "</div>" +
+                            "</div>" +
                             "</div>" +
                             "</div>");
                     });

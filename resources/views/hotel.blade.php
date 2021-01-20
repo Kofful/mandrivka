@@ -90,17 +90,17 @@
                 <p class='tour-info' id='tour_price'> " . "Цена: <span>" . $hotel['price'] . "</span> грн" . "</p>
                 <p class='tour-info' id='tour_daterange'>" . "Время тура: <span>" . $daterange . "</span></p>
                 <p class='tour-info' id='tour_places'> " . "Мест: <span>" . (isset($room['places']) ? $room['places'] : 0) . "</span></p>
-                <label class='label-form'>Имя</label>
+                <label class='label-form tour-info'>Имя</label>
                 <input class='form-control' placeholder='Введите имя' type='text' id='customer_name' required>
-                <label class='label-form phone-request'>Телефон</label>
+                <label class='label-form phone-request tour-info'>Телефон</label>
                 <input class='form-control' type='tel' placeholder='Пример: 0660006600' pattern='\d{10}' minlength='10'
                        maxlength='10' id='customer_phone' required>
                 <button class='btn btn-warning btn-form btn-send-request' id='send-reservation-button' onclick='sendReservation()'>Отправить</button>";
                 } else {
                     echo "<p class='title-form'>Рейтинг</p>
-                    <p class='tour-info'> " . "5" . "</p>
-                    <p class='title-form'>Свободных номеров</p>
-                    <p class='tour-info'>" . $hotel['empty_rooms'] . "/" . sizeof($hotel['rooms']) . "</p>
+                    <div class='hotels-places-container'><img class='hotel-places' src='../images/room.png'><p class='hotel-info'> " . $hotel['rating'] . "</p></div>
+                    <p class='title-form-free'>Свободных номеров</p>
+                    <div class='rating-container'><img class='hotel-rating' src='../images/star.png'><p class='hotel-info'>" . $hotel['empty_rooms'] . " / " . sizeof($hotel['rooms']) . "</p></div>
                     ";
                 }
                 ?>

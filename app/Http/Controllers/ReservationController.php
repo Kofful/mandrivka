@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Reservation;
+use Exception;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
     public function add(Request $request) {
         if(!$request->daterange) {
-            return null;
+            return new Exception('no date range');
         }
         $application = Application::create([
             'price' => $request->price,
@@ -32,5 +33,6 @@ class ReservationController extends Controller
             $dispatch1 = date("Y-m-d", strtotime($dispatch1 . "+1 day"));
         }
         return $application;
+
     }
 }

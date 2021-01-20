@@ -34,10 +34,29 @@ class HotelsController extends Controller
                 continue;
             }
             if ($count >= $page) {
+                $hotel_rooms = $hotel->rooms;
+                $empty_rooms = 0;
+                $rating = 0;
+                $min_price = 0;
+                foreach($hotel_rooms as $room) {
+                    $reservations = Reservation::where('room_id', $room->id)->where('reserved', date('Y-m-d', time()))->get();
+                    if($reservations->isEmpty()) {
+                        $empty_rooms++;
+                    }
+                    if($room->price < $min_price || $min_price == 0) {
+                        $min_price = $room->price;
+                    }
+                }
+                foreach($hotel->comments->toArray() as $comment) {
+                    $rating += $comment['grade'];
+                }
                 $result = [
                     'state' => $hotel->state->state,
                     'country' => $hotel->state->country->country,
-                    'path' => $hotel->photos->first()->path
+                    'path' => $hotel->photos->first()->path,
+                    'price' => $min_price,
+                    'rating' => $rating == 0 ? 'нет отзывов' : number_format($rating / count($hotel->comments), 1, '.', ''),
+                    'free_places' => $empty_rooms . "/" . count($hotel_rooms)
                 ];
                 $result = array_merge($hotel->attributesToArray(), $result);
                 array_push($response, $result);
@@ -169,6 +188,10 @@ class HotelsController extends Controller
             $comment['user'] = User::find($comment['user_id'])->name;
             array_push($comments, $comment);
         }
+        $rating = 0;
+        foreach($hotel->comments->toArray() as $comment) {
+            $rating += $comment['grade'];
+        }
 
         $data = [
             'hotel' => [
@@ -182,6 +205,7 @@ class HotelsController extends Controller
                 'rooms' => $rooms,
                 'price' => $total_price,
                 'empty_rooms' => $empty_rooms,
+                'rating' => $rating == 0 ? 'нет отзывов' : number_format($rating / count($hotel->comments), 1, '.', ''),
                 'comments' => $comments
             ],
             'room' => isset($room) ? $room->toArray() : [],

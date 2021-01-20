@@ -211,13 +211,25 @@ input {
 }
 
 .title-form {
+    margin-top: 20px;
     margin-bottom: 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.title-form-free {
+    margin-top: 70px;
     font-size: 25px;
     font-weight: 600;
 }
 
 .label-form {
     margin-top: 10px;
+}
+
+.hotel-info {
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .btn-form {
@@ -255,6 +267,12 @@ input {
     width: 200px;
     border-radius: 5px;
     margin-top: 10px;
+}
+
+.hotels-info-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .info-container {
@@ -295,6 +313,35 @@ input {
     margin-right: 5px;
 }
 
+.rating-container {
+    display: flex;
+    min-width: 250px;
+    align-items: center;
+}
+
+.hotels-places-container {
+    display: flex;
+    min-width: 200px;
+    align-items: center;
+}
+
+.hotels-info-places {
+    font-size: 19px;
+    font-weight: 500;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.info-rating {
+    font-size: 19px;
+    font-weight: 500;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.info-price {
+    font-size: 19px;
+    font-weight: 500;
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
 .places-container {
     display: flex;
@@ -562,6 +609,27 @@ input {
     flex-direction: column;
 }
 
+.tour-info {
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.tour-accept-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+}
+
+.tour-accepted {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: orangered;
+}
+
 .dropdown-img {
     cursor: pointer;
     width: 30px;
@@ -601,6 +669,18 @@ header img {
     justify-content: center;
 }
 
+
+.hotel-places {
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+}
+
+.hotel-rating {
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+}
 
 .rating {
     display: inline-block;
