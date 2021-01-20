@@ -15,6 +15,8 @@ class RoomController extends Controller
         $dispatch2 = strtotime($daterange[2]);
         $dispatch1 = date("Y-m-d", $dispatch1);
         $dispatch2 = date("Y-m-d", $dispatch2);
+        error_log($dispatch1);
+        error_log($dispatch2);
         $interval = date_diff(date_create($dispatch1), date_create($dispatch2));//разница дней
         $nights = intval($interval->format("%a"));
 
@@ -24,11 +26,9 @@ class RoomController extends Controller
 
         $places = 0;
         $min_age = 18;
-        error_log($request);
         if (isset($request->children) && $request->children > 0) {
             $adults = $request->adults;
             $places += $adults;
-            $half = 0;
             foreach ($request->child_ages as $childage) {
                 if ($childage > 1) {
                     $places++;
@@ -76,7 +76,7 @@ class RoomController extends Controller
 
                 //проверка, есть ли места
                 if (($room->reservations
-                    ->where('reserved', '>=', $request->dispatch1)
+                    ->where('reserved', '>=', $dispatch1)
                     ->where('reserved', '<', $dispatch2)
                     ->first())) {
                     continue;//не подходит, потому что занят в выбранный период

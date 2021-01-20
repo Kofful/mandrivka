@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\RoomType;
 use App\Models\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HotelsController extends Controller
@@ -163,6 +164,11 @@ class HotelsController extends Controller
                 }
             }
         }
+        $comments = [];
+        foreach($hotel->comments->toArray() as $comment) {
+            $comment['user'] = User::find($comment['user_id'])->name;
+            array_push($comments, $comment);
+        }
 
         $data = [
             'hotel' => [
@@ -175,7 +181,8 @@ class HotelsController extends Controller
                 'description' => $hotel->description,
                 'rooms' => $rooms,
                 'price' => $total_price,
-                'empty_rooms' => $empty_rooms
+                'empty_rooms' => $empty_rooms,
+                'comments' => $comments
             ],
             'room' => isset($room) ? $room->toArray() : [],
             'daterange' => $request->input('daterange'),
