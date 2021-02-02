@@ -314,7 +314,7 @@
                             "<img src='../images/uploads/" + hotel["path"] + "' style='min-width:200px;width:200px;height:133px;align-self:center'>" +
                             "<div style='margin-left:10px;margin-top:5px;margin-right:10px; width:100%;'>" +
                             "<a href='/hotels/" + hotel['hotel_id'] + "?room_id=" + hotel['id'] + "&daterange=" + daterange + "' class='title'>" + hotel['hotel'] + "</a>\n" +
-                            "<p class='description'>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p>\n" +
+                            "<div class='description'><p>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p></div>\n" +
                             "<div class='info-container'>" +
                             "<div class='nutrition-container'><img class='image-nutrition' src='../images/nutrition.png'><p class='info-nutrition'>" + hotel['nutrition'] + "</p></div>" +
                             "<div class='roomtype-container'><img class='image-roomtype' src='../images/room.png'><p class='info-roomtype'>" + hotel['room_type'] + "</p></div>" +

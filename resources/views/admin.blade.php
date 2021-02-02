@@ -92,6 +92,8 @@
     }
 
     function addHotel() {
+        let admin_error = $("#admin-error");
+        admin_error.text("");
         let state = $('#new_hotel_states')[0];
         let hotel = $('#hotel_name')[0];
         let min_age = $('#min_age')[0];
@@ -100,14 +102,39 @@
         let description = CKEDITOR.instances.description_editor.getData();
 
         let data = new FormData();
-        $.each($("#add-images")[0].files, function (key, value) {
+        let files = $("#add-images")[0].files;
+        if(!files.length) {
+            admin_error.text("Фотографии не загружены.")
+            return;
+        }
+        $.each(files, function (key, value) {
             data.append('photo' + key, value);
         });
+        if(state.value == 0) {
+            admin_error.text("Город не выбран.")
+            return;
+        }
         data.append('state_id', state.value);
+        if(!hotel.value) {
+            admin_error.text("Название не введено.")
+            return;
+        }
         data.append('hotel', hotel.value);
+        if(!min_age.value) {
+            admin_error.text("Минимальный возраст не введен.")
+            return;
+        }
         data.append('min_age', min_age.value);
+        if(nutrition.value == 0) {
+            admin_error.text("Тип питания не выбран.")
+            return;
+        }
         data.append('nutrition', nutrition.value);
         data.append('hot', hot.value === "on" ? 1 : 0);
+        if(!description) {
+            admin_error.text("Описание не введено.")
+            return;
+        }
         data.append('description', description);
         $.ajax({
             url: "hotel/",
@@ -119,7 +146,7 @@
             contentType: false,
             success: function (data) {
                 data = JSON.parse(data);
-                console.log(data);
+                location.reload();
             },
             error: function () {
             }
@@ -228,6 +255,7 @@
                 }
             });
         }</script>
+    <p class="admin-error" id="admin-error"></p>
     <div id="admin-add-hotel">
         <button id="btn_add-hotel" type="submit" class="btn btn-primary" onclick="addHotel()">Добавить</button>
     </div>

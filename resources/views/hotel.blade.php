@@ -61,13 +61,24 @@
         <div>
             <script>
                 function sendReservation() {
+                    let customer_error = $('#customer_error');
+                    customer_error.text("");
                     let params = (new URL(document.location)).searchParams;
                     let room_id = params.get("room_id");
                     let price = $('#tour_price span')[0].innerText;
                     let places = $('#tour_places span')[0].innerText;
                     let daterange = $('#tour_daterange span')[0].innerText;
                     let customer_name = $('#customer_name').val();
+                    if(!/^[а-яА-ЯёЁїЇіІ]+$/.test(customer_name)) {
+                        console.log("Неверное имя");
+                        customer_error.text("Неверное имя");
+                        return;
+                    }
                     let customer_phone = $('#customer_phone').val();
+                    if(!/^\d{10}$/.test(customer_phone)) {
+                        customer_error.text("Неверный телефон");
+                        return;
+                    }
                     $.post('/reservation', {
                         room_id,
                         price,
@@ -95,7 +106,8 @@
                 <label class='label-form phone-request tour-info'>Телефон</label>
                 <input class='form-control' type='tel' placeholder='Пример: 0660006600' pattern='\d{10}' minlength='10'
                        maxlength='10' id='customer_phone' required>
-                <button class='btn btn-warning btn-form btn-send-request' id='send-reservation-button' onclick='sendReservation()'>Отправить</button>";
+                <p class='form-error' id='customer_error'></p>
+                <button class='btn btn-warning btn-send-request' id='send-reservation-button' onclick='sendReservation()'>Отправить</button>";
                 } else {
                     echo "<p class='title-form'>Рейтинг</p>
                     <div class='hotels-places-container'><img class='hotel-places' src='../images/room.png'><p class='hotel-info'> " . $hotel['rating'] . "</p></div>
@@ -140,6 +152,10 @@
                     let places = $('#places');
                     let url = window.location.pathname;
                     let hotel = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+                    if(!price.val() || !places.val() || room_type.val() == 0) {
+                        console.log("Not full info");
+                        return;
+                    }
                     $.post('/room', {
                         type_id: room_type.val(),
                         price: price.val(),
@@ -150,13 +166,7 @@
                             room_type.val('0');
                             price.val('');
                             places.val('');
-                            // let table_body = $('.table tbody')[0];
-                            // table_body.append("<tr id='" + "room" + data['id'] + "'>
-                            // <td>" . data['room_type'] ."</td>
-                            // <td>" . data['price'] . "</td>
-                            // <td>" . data['places'] . "</td>
-                            // <td>" . ['nutrition'] . "</td>" . (((Auth::user() && Auth::user()->is_admin)) ? "<td><button class='btn btn-info btn-room' onclick='deleteRoom(" . $room['id'] . ")'>Удалить</button></td>" : "") . "</tr>";
-
+                            location.reload();
                         }
                     });
                 }

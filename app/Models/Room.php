@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use mysql_xdevapi\Exception;
 
 class Room extends Model
 {
@@ -20,7 +19,7 @@ class Room extends Model
         $count = 0;
         while ($count < 8) {
             $nights = rand(3, 8);
-            $dispatch1 = date("Y-m-d", strtotime("+" . rand(5, 30) . " day", strtotime('2020-06-07')));//TODO change to time() instead of date
+            $dispatch1 = date("Y-m-d", strtotime("+" . rand(5, 30) . " day", time()));
             $dispatch2 = date("Y-m-d", strtotime($dispatch1 . "+$nights days"));
             $room = Room::inRandomOrder()->first();
 

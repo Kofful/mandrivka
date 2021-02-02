@@ -74,8 +74,8 @@
                         hotels.append("<div class='list-item'>\n" +
                             "<img src='../images/uploads/" + hotel["path"] + "' style='min-width:200px;width:200px;height:133px;align-self:center'>" +
                             "<div style='margin-left:10px;margin-top:5px;margin-right:10px; width:100%;'>" +
-                            "<a href='/hotels/" + hotel['id'] + "' class='title'>" + hotel['hotel'] + "</a>\n" +
-                            "<p class='description'>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p>\n" +
+                            "<a href='/hotels/" + hotel['id'] + "' class='title'>" + hotel['hotel'] + "</a>" +
+                            "<div class='description'><p>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p></div>" +
                             "<div class='hotels-info-container'>" +
                             "<div class='rating-container'><img class='image-rating' src='../images/star.png'><p class='info-rating'>" + "Рейтинг: " + hotel['rating'] + "</p></div>" +
                             "<div class='hotels-places-container'><img class='image-places' src='../images/room.png'><p class='hotels-info-places'>" + "Свободно: " + hotel['free_places'] + "</p></div>" +

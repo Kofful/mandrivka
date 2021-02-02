@@ -103,7 +103,8 @@ class RoomController extends Controller
                 if ($total_price > $max_price || $total_price < $min_price) {
                     continue;
                 }
-                if ($count >= $page) {
+                $count++;
+                if ($count > $page) {
                     $tour = [
                         'room_type' => $room->roomType->type,
                         'price' => $total_price,
@@ -118,9 +119,8 @@ class RoomController extends Controller
                     ];
                     $tour = array_merge($room->attributesToArray(), $tour);
                     array_push($tours, $tour);
-                    break;
                 }
-                $count++;
+                break;
             }
         }
         return json_encode($tours);
