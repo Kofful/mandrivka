@@ -114,7 +114,7 @@
             </ul>
         </nav>
     </div>
-    <main class="py-4 container-fluid">
+    <main class="py-4 container-fluid col-12 col-sm-12">
         @yield('content')
     </main>
 

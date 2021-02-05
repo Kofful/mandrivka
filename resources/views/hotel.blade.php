@@ -37,8 +37,8 @@
     echo "<p class='hotel-location'>" . $hotel['country'] . ", " . $hotel['state'] . "</p>";
     ?>
     <div class='image-container'>
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
-             style="height:400px; width:600px;overflow: hidden;">
+        <div id="carouselExampleControls" class="carousel slide my-carousel" data-ride="carousel"
+             style="">
             <div class="carousel-inner">
                 <?php
                 for ($i = 0; $i < sizeof($hotel['photos']); $i++) {
@@ -110,9 +110,9 @@
                 <button class='btn btn-warning btn-send-request' id='send-reservation-button' onclick='sendReservation()'>Отправить</button>";
                 } else {
                     echo "<p class='title-form'>Рейтинг</p>
-                    <div class='hotels-places-container'><img class='hotel-places' src='../images/room.png'><p class='hotel-info'> " . $hotel['rating'] . "</p></div>
+                    <div class='hotels-places-container'><img class='hotel-places' src='../images/star.png'><p class='hotel-info'> " . $hotel['rating'] . "</p></div>
                     <p class='title-form-free'>Свободных номеров</p>
-                    <div class='rating-container'><img class='hotel-rating' src='../images/star.png'><p class='hotel-info'>" . $hotel['empty_rooms'] . " / " . sizeof($hotel['rooms']) . "</p></div>
+                    <div class='rating-container'><img class='hotel-rating' src='../images/room.png'><p class='hotel-info'>" . $hotel['empty_rooms'] . " / " . sizeof($hotel['rooms']) . "</p></div>
                     ";
                 }
                 ?>

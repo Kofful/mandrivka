@@ -312,7 +312,7 @@
                     data.forEach(function (hotel) {
                         hotels.append("<div class='list-item'>\n" +
                             "<img src='../images/uploads/" + hotel["path"] + "' style='min-width:200px;width:200px;height:133px;align-self:center'>" +
-                            "<div style='margin-left:10px;margin-top:5px;margin-right:10px; width:100%;'>" +
+                            "<div style='margin-left:10px;margin-top:5px;margin-right:10px;'>" +
                             "<a href='/hotels/" + hotel['hotel_id'] + "?room_id=" + hotel['id'] + "&daterange=" + daterange + "' class='title'>" + hotel['hotel'] + "</a>\n" +
                             "<div class='description'><p>" + (hotel['description'].length > 300 ? (hotel['description'].substring(0, 300) + "...") : hotel['description']) + "</p></div>\n" +
                             "<div class='info-container'>" +

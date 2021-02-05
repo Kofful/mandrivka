@@ -9,6 +9,54 @@ p {
 input {
     box-shadow: none !important;
 }
+.my-carousel {
+    height:400px;
+    width:600px;
+    overflow: hidden;
+}
+@media(max-width:640px) {
+	.list-item {
+		flex-direction: column;
+	}
+	.info-container {
+		flex-direction: column;
+		align-items: start !important;
+	}
+	.hotels-info-container {
+		flex-direction: column;
+		align-items: start !important;
+	}
+    .image-container {
+        flex-direction: column !important;
+    }
+    .my-carousel {
+        height: auto;
+        width:100%;
+        overflow: hidden;
+    }
+    .my-carousel img {
+        height: 250px !important;
+    }
+    .right-form {
+        width: auto !important;
+        border-radius: 0 0 10px 10px!important;
+    }
+    .rooms-container {
+        width: 100% !important;
+    }
+    .table {
+        max-width: 100%;
+        table-layout: fixed;
+        overflow-wrap: break-word;
+    }
+    .table input, select {
+        width: 100% !important;
+    }
+    .form-search {
+        width: auto;
+        min-width: 0 !important;
+    }
+}
 
 .list-item {
     display: flex;
@@ -146,7 +194,7 @@ input {
 }
 
 .main-title {
-    font-size: 20px;
+    font-size: 17px;
     margin: 5px 0 0 5px;
     font-weight: 700;
     font-family: 'Roboto Condensed', sans-serif;
@@ -166,7 +214,7 @@ input {
 }
 
 .main-location {
-    font-size: 16px;
+    font-size: 15px;
     margin: 0 0 0 5px;
     color: rgba(50, 50, 50, 0.7);
     font-weight: 400;
